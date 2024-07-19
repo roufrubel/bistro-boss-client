@@ -1,8 +1,11 @@
-import { useEffect, useRef, useState } from 'react';
+import { useContext, useEffect, useRef, useState } from 'react';
 import { loadCaptchaEnginge, LoadCanvasTemplate, validateCaptcha } from 'react-simple-captcha';
+import { AuthContext } from '../../providers/AuthProvider';
+import { Link } from 'react-router-dom';
 
 const Login = () => {
 
+  const {signIn} = useContext(AuthContext);
   const captchaRef = useRef(null);
   const [disabled, setDisabled] = useState(true);
   useEffect( () => {
@@ -24,7 +27,12 @@ const Login = () => {
         const email = form.email.value;
         const password = form.password.value;
         console.log(email, password)
-    }
+        signIn(email, password)
+        .then(result => {
+          const user = result.user;
+          console.log(user)
+        })
+      }
     return (
         <div className="hero bg-base-200 min-h-screen">
         <div className="hero-content flex-col lg:flex-row-reverse">
@@ -63,6 +71,9 @@ const Login = () => {
                 <button disabled={disabled} className="btn btn-neutral"><input className="uppercase font-semibold" type="submit"  value="Login" /></button>
               </div>
             </form>
+            <div className='p-4 py-4'>
+              <p>New here? <span className="font-bold text-primary"><Link to="/signup">Create Account</Link></span></p>
+            </div>
           </div>
         </div>
       </div>
