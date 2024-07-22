@@ -118,7 +118,7 @@ const SignUp = () => {
           </form>
           <div className="p-4 py-4">
             <p>
-              Already have account?{" "}
+              Already have an account? 
               <span className="font-bold text-primary">
                 <Link to="/login">Login here</Link>
               </span>
