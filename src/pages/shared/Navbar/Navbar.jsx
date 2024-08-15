@@ -1,11 +1,15 @@
 import { useContext } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../../providers/AuthProvider";
+import { FaCartPlus } from "react-icons/fa6";
+import useCart from "../../../hooks/useCart";
+
 
 
 const Navbar = () => {
 
   const {user, logOut} = useContext(AuthContext);
+  const [cart] = useCart();
 
   const handleLogOut = () => {
     logOut()
@@ -17,8 +21,16 @@ const Navbar = () => {
       <li><Link to="/">Home</Link></li>
       <li><Link to="/menu">Our Menu</Link></li>
       <li><Link to="/order/salad">Order Food</Link></li>    
+      <li><Link to="/dashboard/cart">
+      <button className="btn">
+      <FaCartPlus />
+  <div className="badge badge-secondary">+{cart.length}</div>
+</button>
+      </Link></li>    
       {
-      user ?  <li><Link onClick={handleLogOut} className=""  to="/logout">Log Out</Link></li> : <li><Link className="btn btn-outline"  to="/login">Login </Link></li> 
+      user ?  <> 
+      {/* <span>{user?.displayName}</span> */}
+      <button onClick={handleLogOut} >Log Out</button></> : <><li><Link className="btn btn-outline"  to="/login">Login </Link></li> </>
     } 
     </>
 
