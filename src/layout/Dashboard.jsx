@@ -68,6 +68,11 @@ const Dashboard = () => {
             </NavLink>
           </li>
           <li>
+            <NavLink to="/dashboard/paymentHistory">
+            <TbBrandBooking />Payment History
+            </NavLink>
+          </li>
+          <li>
             <NavLink to="/dashboard/cart">
               <FaCartPlus /> My Cart ({cart.length})
             </NavLink>
